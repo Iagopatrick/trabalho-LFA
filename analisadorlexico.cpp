@@ -76,8 +76,22 @@ void externos(char entrada){
             perror("Erro, caracter inválido!");
         }
     }
-    if (int(entrada) >= 91 && int(entrada) <= 93){ //está no intervalo dos colchetes
-
+    else if (int(entrada) >= 91 && int(entrada) <= 93){ //está no intervalo dos colchetes
+        if(entrada == '['){
+            cout << "<ABRE-COLCHETES>\n";
+        }else if(entrada == ']'){
+            cout << "<FECHA-COLCHETES>\n";
+        }else{
+            perror("Erro, caracter inválido!");
+        }
+    }else if(int(entrada) >= 40 && int(entrada) <= 41){
+        if(entrada == '('){
+            cout << "<ABRE-PARENTESES>\n";
+        }else if(entrada == ')'){
+            cout << "<FECHA-PARENTESES>\n";
+        }else{
+            perror("Erro, caracter inválido!");
+        }
     }
 
 
@@ -96,9 +110,10 @@ int main(){
     do{
         cin >> entrada;
         cout << int(entrada) << " " << entrada;
-        if((entrada >= 32 && entrada<= 41) || (entrada >= 58 && entrada <= 64)){ //imtervalo de símbolos não aceitos na linguagem
+        if((entrada >= 32 && entrada<= 39) || (entrada >= 58 && entrada <= 64) || entrada == 44 ||entrada == 46){ //imtervalo de símbolos não aceitos na linguagem
             flag = false;
             cout << "entrada invalida!\n";
+            break;
         }else{
             if(int(entrada) >= 48 && int(entrada) <= 57){
                 saida = ehNumero(entrada);
@@ -106,6 +121,7 @@ int main(){
                 saida = ehVariavel(entrada);
             }
             ehOp(saida);
+            externos(saida);
         }
         
 
