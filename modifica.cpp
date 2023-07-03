@@ -21,27 +21,25 @@ FECHA COLCHETE
 
 
 
-bool ehNumero(char entrada){
+int ehNumero(string entrada, int i){
     // Função que verifica que a entrada é um token do tipo numero. A função faz isso usando o intervalo dos número em ASCII.
-    if(int(entrada) >= 48 && int(entrada) <= 57){
-      return true;
+    
+    while(int(entrada[i]) >= 48 && int(entrada[i]) <= 57){
+        i++;
     }
-    return false;
+    return i;
 }
 
-bool ehVariavel(char entrada){
+int ehVariavel(string entrada, int i){
     // Função que verifica que a entrada é um token do tipo variavel. Só para quando o próximo é uma opreção ou um externo.
     // ATENÇÃO: falta verificar se é um externo
 
-    int cont = 0;
-    while(entrada != '+' && entrada != '-' && entrada != '/' && entrada != '*'){
-        cont++;
-        cin >> entrada;
+    
+    while((int(entrada[i]) >= 48 && int(entrada[i]) <= 57) || (int(entrada[i]) >= 65 && int(entrada[i]) <= 90) || (int(entrada[i]) >= 97 && int(entrada[i]) <= 122)){
+        i++;
     }
-    if(cont > 0){
-        cout << "<variavel>\n";
-    }
-    return entrada;
+   
+    return i;
 }
 
 void ehOp(char entrada){
@@ -88,26 +86,29 @@ int main(){
     do{
       //talvez seja melhor usar iterator para acessar a string
         cin >> entrada;
-        cout << int(entrada) << " " << entrada;
+        cout << entrada;
         for(int i = 0; i < entrada.size(); i++){
-          if((entrada[i] >= 32 && entrada[i]<= 41) || (entrada[i] >= 58 && entrada[i] <= 64)){ //imtervalo de símbolos não aceitos na linguagem
-            flag = false;
-            cout << "entrada invalida!\n";
-          }else{
-              if(int(entrada[i]) >= 48 && int(entrada[i]) <= 57){
-                  saida = ehNumero(entrada[i]);
-                  number = true;
-                  break;
-              }else{ 
-                  saida = ehVariavel(entrada[i]);
-              }
-            ehOp(entrada[i]);
-            externos(entrada[i]        }
+            if((entrada[i] >= 32 && entrada[i]<= 41) || (entrada[i] >= 58 && entrada[i] <= 64)){ //imtervalo de símbolos não aceitos na linguagem
+                // flag = false;
+                cout << "entrada invalida!\n";
+            }else{
+                cout << "elemento verificado: " << entrada[i] << "valor de i: " << i << "\n";
+                if(int(entrada[i]) >= 48 && int(entrada[i]) <= 57){
+                    saida = ehNumero(entrada, i);
+                    i += saida;
+                    cout << "<NUM>\n";
+                    continue;
+                }else if((int(entrada[i]) >= 65 && int(entrada[i]) <= 90) || (int(entrada[i]) >= 97 && int(entrada[i]) <= 122)){ 
+                    saida = ehVariavel(entrada, i);
+                    i += saida - 1;
+                    cout << "<VAR>\n";
+                    continue;
+                }
+                ehOp(entrada[i]);
+                externos(entrada[i]);
+            }
         }
-        
-        
-
-    }while(entrada != EOF);
+    }while(!EOF);
 
 
 
