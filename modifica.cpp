@@ -59,21 +59,34 @@ void externos(char entrada){
 
 
     if (int(entrada) >= 123 && int(entrada) <= 125){ //está no intervalo das chaves
-        if(entrada == '['){
-            cout << "<ABRE-CHAVES>\n";
-        }else if(entrada == ']'){
-            cout << "<FECHA-CHAVES>\n";
+        if(entrada == '{'){
+            cout << "<ABRE-CHAVE>\n";
+        }else if(entrada == '}'){
+            cout << "<FECHA-CHAVE>\n";
         }else{
             perror("Erro, caracter inválido!");
         }
     }
-    if (int(entrada) >= 91 && int(entrada) <= 93){ //está no intervalo dos colchetes
-
+    else if (int(entrada) >= 91 && int(entrada) <= 93){ //está no intervalo dos colchetes
+        if(entrada == '['){
+            cout << "<ABRE-COLCHETE>\n";
+        }else if(entrada == ']'){
+            cout << "<FECHA-COLCHETE>\n";
+        }else{
+            perror("Erro, caracter inválido!");
+        }
+    }else{
+        if(entrada == '('){
+            cout << "<ABRE-PARENTESE>\n";
+        }else if(entrada == ')'){
+            cout << "<FECHA-PARENTESE>\n";
+        }else{
+            perror("Erro, caracter inválido!");
+        }
     }
 }
 
 
-void error(char entrada);
 
 
 int main(){
@@ -88,27 +101,31 @@ int main(){
         cin >> entrada;
         cout << entrada;
         for(int i = 0; i < entrada.size(); i++){
-            if((entrada[i] >= 32 && entrada[i]<= 41) || (entrada[i] >= 58 && entrada[i] <= 64)){ //imtervalo de símbolos não aceitos na linguagem
+            if((entrada[i] >= 32 && entrada[i]<= 39) || (entrada[i] >= 58 && entrada[i] <= 64)){ //imtervalo de símbolos não aceitos na linguagem
                 // flag = false;
                 cout << "entrada invalida!\n";
             }else{
-                cout << "elemento verificado: " << entrada[i] << "valor de i: " << i << "\n";
+                // cout << "elemento verificado: " << entrada[i] << "valor de i: " << i << "\n";
                 if(int(entrada[i]) >= 48 && int(entrada[i]) <= 57){
                     saida = ehNumero(entrada, i);
-                    i += saida;
+                    i = saida - 1;
                     cout << "<NUM>\n";
                     continue;
                 }else if((int(entrada[i]) >= 65 && int(entrada[i]) <= 90) || (int(entrada[i]) >= 97 && int(entrada[i]) <= 122)){ 
                     saida = ehVariavel(entrada, i);
-                    i += saida - 1;
+                    i = saida - 1;
                     cout << "<VAR>\n";
                     continue;
+                }else if(entrada[i] == '+' || entrada[i] == '-' || entrada[i] == '/' || entrada[i] == '*'){
+                    
+                    cout << "<OP>\n";
+                }else{
+                    externos(entrada[i]);
+
                 }
-                ehOp(entrada[i]);
-                externos(entrada[i]);
             }
         }
-    }while(!EOF);
+    }while(EOF);
 
 
 
