@@ -4,11 +4,20 @@ using namespace std;
 
 
 int main(){
-    char entrada;
-    // tokens
-    // char num[10] = {0,1,2,3,4,5,6,7,8,9};
-    cin >> entrada;
-    cout << int(entrada);
+    FILE *arq;
+    char var[100];
+    int saida, i = 0;
+    string entrada;
+
+    arq = fopen("arquivoTeste.txt", "r");
+    
+    do{
+        fgets(var, 100, arq);
+        entrada = var;
+        cout << entrada.size() - 1 << "\n";
+
+    }while(!feof(arq));
+     
 
 
 
