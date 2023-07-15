@@ -1,0 +1,5 @@
+[2+1]
+x-(1*2)
+variavel
+variavel-outra234variavel+[({2*1}-1)+1]
+[2*(4+3)]

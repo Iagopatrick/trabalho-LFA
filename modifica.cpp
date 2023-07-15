@@ -90,19 +90,25 @@ void externos(char entrada){
 
 
 int main(){
-  // 250 + 123
+  
+    char var[100];
+    int saida, i = 0;
     string entrada;
-    char saida;
-    bool flag = true;
-
+    FILE *arq;
     
+    
+    arq = fopen("arquivoTeste.txt", "r");
+
+   
     do{
-      //talvez seja melhor usar iterator para acessar a string
-        cin >> entrada;
+        fgets(var, 100, arq);
+     
+
+        entrada = var;
+        
         cout << entrada;
-        for(int i = 0; i < entrada.size(); i++){
-            if((entrada[i] >= 32 && entrada[i]<= 39) || (entrada[i] >= 58 && entrada[i] <= 64)){ //imtervalo de símbolos não aceitos na linguagem
-                // flag = false;
+        for(i = 0; i < entrada.size(); i++){
+            if((int(entrada[i]) >= 32 && int(entrada[i])<= 39) || (int(entrada[i]) >= 58 && int(entrada[i]) <= 64)){ //imtervalo de símbolos não aceitos na linguagem
                 cout << "entrada invalida!\n";
             }else{
                 // cout << "elemento verificado: " << entrada[i] << "valor de i: " << i << "\n";
@@ -121,14 +127,10 @@ int main(){
                     cout << "<OP>\n";
                 }else{
                     externos(entrada[i]);
-
                 }
             }
         }
-    }while(EOF);
-
-
-
+    }while(!EOF);
 
     return 0;
 }
