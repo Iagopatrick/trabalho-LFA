@@ -116,7 +116,7 @@ int main(){
 
         entrada = var;
         
-        cout << entrada;
+        // cout << entrada;
         for(i = 0; i < entrada.size(); i++){
             
             // cout << "elemento verificado: " << entrada[i] << "valor de i: " << i << "\n";
