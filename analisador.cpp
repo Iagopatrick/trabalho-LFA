@@ -44,38 +44,31 @@ void ehOp(char entrada){
 }
 
 void externos(char entrada){
-    /* CHAVES COLCHETES PARENTES
-    Essa função irá verificar se o caracter é [] {} () e associar aos tokens. Faço isso verificando os intervalos,
-    caso esteja no intervalo desses 'externos', então eu entro dentro da possibilidade de ser um token valido. Caso seja invalido,
-    o programa para e aparece uma mensagem de erro. */
+    /*
+    Essa função irá verificar se o caracter é [] {} () e associar aos tokens. Será feito verificando os intervalos,
+    caso esteja no intervalo desses 'externos', então está dentro da possibilidade de ser um token valido.*/
 
 
-    if (int(entrada) >= 123 && int(entrada) <= 125){ //está no intervalo das chaves
+    if (int(entrada) >= 123 && int(entrada) <= 125){ //Está no intervalo das chaves
         if(entrada == '{'){
             cout << "<ABRE-CHAVE>\n";
         }else if(entrada == '}'){
             cout << "<FECHA-CHAVE>\n";
-        }else{
-            perror("Erro, caracter inválido!");
         }
     }
-    else if (int(entrada) >= 91 && int(entrada) <= 93){ //está no intervalo dos colchetes
+    else if (int(entrada) >= 91 && int(entrada) <= 93){ //Está no intervalo dos colchetes
         if(entrada == '['){
             cout << "<ABRE-COLCHETE>\n";
         }else if(entrada == ']'){
             cout << "<FECHA-COLCHETE>\n";
-        }else{
-            perror("Erro, caracter inválido!");
         }
-    }else{
+    }else{ //Está no intervalo dos parênteses
         if(entrada == '('){
             cout << "<ABRE-PARENTESE>\n";
         }else if(entrada == ')'){
             cout << "<FECHA-PARENTESE>\n";
-        }else{
-            perror("Erro, caracter inválido!");
         }
-    }
+    }   
 }
 
 
@@ -129,7 +122,7 @@ int main(){
 
             }else if(verificaExternos(entrada[i])){
                 externos(entrada[i]);
-                
+
             }else{
                 if(entrada[i] == '\n'){
                     break; //Significa o fim da verificação desse linha
