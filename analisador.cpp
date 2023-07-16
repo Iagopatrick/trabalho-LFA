@@ -51,22 +51,22 @@ void externos(char entrada){
 
     if (int(entrada) >= 123 && int(entrada) <= 125){ //Está no intervalo das chaves
         if(entrada == '{'){
-            cout << "<ABRE-CHAVE>\n";
+            cout << "<ABRE-CHAVES>\n";
         }else if(entrada == '}'){
-            cout << "<FECHA-CHAVE>\n";
+            cout << "<FECHA-CHAVES>\n";
         }
     }
     else if (int(entrada) >= 91 && int(entrada) <= 93){ //Está no intervalo dos colchetes
         if(entrada == '['){
-            cout << "<ABRE-COLCHETE>\n";
+            cout << "<ABRE-COLCHETES>\n";
         }else if(entrada == ']'){
-            cout << "<FECHA-COLCHETE>\n";
+            cout << "<FECHA-COLCHETES>\n";
         }
     }else{ //Está no intervalo dos parênteses
         if(entrada == '('){
-            cout << "<ABRE-PARENTESE>\n";
+            cout << "<ABRE-PARÊNTESES>\n";
         }else if(entrada == ')'){
-            cout << "<FECHA-PARENTESE>\n";
+            cout << "<FECHA-PARÊNTESES>\n";
         }
     }   
 }
@@ -115,10 +115,10 @@ int main(){
             }else if((int(entrada[i]) >= 65 && int(entrada[i]) <= 90) || (int(entrada[i]) >= 97 && int(entrada[i]) <= 122)){//Intervalo em ASCII das letras minúsculas e maiúsculas
                 saida = ehVariavel(entrada, i);
                 i = saida - 1; // forma análoga à verificação dos números
-                cout << "<VAR>\n";
+                cout << "<VARIÁVEL>\n";
                 continue; 
             }else if(entrada[i] == '+' || entrada[i] == '-' || entrada[i] == '/' || entrada[i] == '*'){
-                cout << "<OP>\n";
+                ehOp(entrada[i]);
 
             }else if(verificaExternos(entrada[i])){
                 externos(entrada[i]);
@@ -128,8 +128,8 @@ int main(){
                     break; //Significa o fim da verificação desse linha
                 }
 
-                cout << "entrada invalida!\n";
-                cout << "carcateres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: " << entrada[i] << "\n";
+                cout << "Entrada inválida!\n";
+                cout << "Carcteres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: " << entrada[i] << "\n";
                 break; //A verificação da linha termina caso haja erro
             }
             

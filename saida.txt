@@ -1,81 +1,81 @@
 Analisando: [2+1]
 
-<ABRE-COLCHETE>
+<ABRE-COLCHETES>
 <NUM>
-<OP>
+<MAIS>
 <NUM>
-<FECHA-COLCHETE>
+<FECHA-COLCHETES>
 Analisando: x-(1*2)
 
-<VAR>
-<OP>
-<ABRE-PARENTESE>
+<VARIÁVEL>
+<MENOS>
+<ABRE-PARÊNTESES>
 <NUM>
-<OP>
+<MULTIPLICAÇÃO>
 <NUM>
-<FECHA-PARENTESE>
+<FECHA-PARÊNTESES>
 Analisando: variavel
 
-<VAR>
+<VARIÁVEL>
 Analisando: variavel-outra234variavel+[({2*1}-1)+1]
 
-<VAR>
-<OP>
-<VAR>
-<OP>
-<ABRE-COLCHETE>
-<ABRE-PARENTESE>
-<ABRE-CHAVE>
+<VARIÁVEL>
+<MENOS>
+<VARIÁVEL>
+<MAIS>
+<ABRE-COLCHETES>
+<ABRE-PARÊNTESES>
+<ABRE-CHAVES>
 <NUM>
-<OP>
+<MULTIPLICAÇÃO>
 <NUM>
-<FECHA-CHAVE>
-<OP>
+<FECHA-CHAVES>
+<MENOS>
 <NUM>
-<FECHA-PARENTESE>
-<OP>
+<FECHA-PARÊNTESES>
+<MAIS>
 <NUM>
-<FECHA-COLCHETE>
+<FECHA-COLCHETES>
 Analisando: [2*(4+3)]
 
-<ABRE-COLCHETE>
+<ABRE-COLCHETES>
 <NUM>
-<OP>
-<ABRE-PARENTESE>
+<MULTIPLICAÇÃO>
+<ABRE-PARÊNTESES>
 <NUM>
-<OP>
+<MAIS>
 <NUM>
-<FECHA-PARENTESE>
-<FECHA-COLCHETE>
+<FECHA-PARÊNTESES>
+<FECHA-COLCHETES>
 Analisando: 2 - 2
 
 <NUM>
-entrada invalida!
-carcateres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido:  
+Entrada inválida!
+Carcateres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido:  
 Analisando: 12x-12
 
 <NUM>
-<VAR>
-<OP>
+<VARIÁVEL>
+<MENOS>
 <NUM>
 Analisando: 12()
 
 <NUM>
-<ABRE-PARENTESE>
-<FECHA-PARENTESE>
+<ABRE-PARÊNTESES>
+<FECHA-PARÊNTESES>
 Analisando: 12+´~
 
 <NUM>
-<OP>
-entrada invalida!
-carcateres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: �
+<MAIS>
+Entrada inválida!
+Carcateres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: �
 Analisando: ^+12
 
-entrada invalida!
-carcateres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: ^
+Entrada inválida!
+Carcateres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: ^
 Analisando: asd-{:;}
-<VAR>
-<OP>
-<ABRE-CHAVE>
-entrada invalida!
-carcateres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: :
+<VARIÁVEL>
+<MENOS>
+<ABRE-CHAVES>
+Entrada inválida!
+Carcateres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: :
