@@ -1,0 +1,81 @@
+Analisando: [2+1]
+
+<ABRE-COLCHETE>
+<NUM>
+<OP>
+<NUM>
+<FECHA-COLCHETE>
+Analisando: x-(1*2)
+
+<VAR>
+<OP>
+<ABRE-PARENTESE>
+<NUM>
+<OP>
+<NUM>
+<FECHA-PARENTESE>
+Analisando: variavel
+
+<VAR>
+Analisando: variavel-outra234variavel+[({2*1}-1)+1]
+
+<VAR>
+<OP>
+<VAR>
+<OP>
+<ABRE-COLCHETE>
+<ABRE-PARENTESE>
+<ABRE-CHAVE>
+<NUM>
+<OP>
+<NUM>
+<FECHA-CHAVE>
+<OP>
+<NUM>
+<FECHA-PARENTESE>
+<OP>
+<NUM>
+<FECHA-COLCHETE>
+Analisando: [2*(4+3)]
+
+<ABRE-COLCHETE>
+<NUM>
+<OP>
+<ABRE-PARENTESE>
+<NUM>
+<OP>
+<NUM>
+<FECHA-PARENTESE>
+<FECHA-COLCHETE>
+Analisando: 2 - 2
+
+<NUM>
+entrada invalida!
+carcateres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido:  
+Analisando: 12x-12
+
+<NUM>
+<VAR>
+<OP>
+<NUM>
+Analisando: 12()
+
+<NUM>
+<ABRE-PARENTESE>
+<FECHA-PARENTESE>
+Analisando: 12+Â´~
+
+<NUM>
+<OP>
+entrada invalida!
+carcateres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: Â
+Analisando: ^+12
+
+entrada invalida!
+carcateres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: ^
+Analisando: asd-{:;}
+<VAR>
+<OP>
+<ABRE-CHAVE>
+entrada invalida!
+carcateres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: :

@@ -4,3 +4,8 @@ variavel
 variavel-outra234variavel+[({2*1}-1)+1]
 [2*(4+3)]
 2 - 2
+12x-12
+12()
+12+´~
+^+12
+asd-{:;}
