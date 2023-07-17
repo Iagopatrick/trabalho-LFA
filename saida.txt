@@ -60,7 +60,15 @@ Analisando: 12 ()
 
 <NUM>
 <ABRE-PARÊNTESES>
+Erro! Esse <token> não existe!
+Analisando: 12 ( ) - 12()
+
+<NUM>
+<ABRE-PARÊNTESES>
 <FECHA-PARÊNTESES>
+<MENOS>
+<NUM>
+Erro! Era esperado '(', ')', '{', '}', '[', ']'
 Analisando: 12 + ´~
 
 <NUM>

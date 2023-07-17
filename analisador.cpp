@@ -11,6 +11,9 @@ int ehNumero(string entrada, int i){
     while(int(entrada[i]) >= 48 && int(entrada[i]) <= 57){
         i++;
     }
+    
+
+
     return i;
 }
 
@@ -45,30 +48,22 @@ void ehOp(char entrada){
 
 void externos(char entrada){
     /*
-    Essa função irá verificar se o caracter é [] {} () e associar aos tokens. Será feito verificando os intervalos,
-    caso esteja no intervalo desses 'externos', então está dentro da possibilidade de ser um token valido.*/
+    Essa função irá verificar se o caracter é [] {} () e associar aos tokens. Como já há a verificação dos tokens antes, não é preciso fazer alguma
+    revisão para erros.*/
 
-
-    if (int(entrada) >= 123 && int(entrada) <= 125){ //Está no intervalo das chaves
         if(entrada == '{'){
             cout << "<ABRE-CHAVES>\n";
         }else if(entrada == '}'){
             cout << "<FECHA-CHAVES>\n";
-        }
-    }
-    else if (int(entrada) >= 91 && int(entrada) <= 93){ //Está no intervalo dos colchetes
-        if(entrada == '['){
+        }else if(entrada == '['){
             cout << "<ABRE-COLCHETES>\n";
         }else if(entrada == ']'){
             cout << "<FECHA-COLCHETES>\n";
-        }
-    }else{ //Está no intervalo dos parênteses
-        if(entrada == '('){
+        }else if(entrada == '('){
             cout << "<ABRE-PARÊNTESES>\n";
         }else if(entrada == ')'){
             cout << "<FECHA-PARÊNTESES>\n";
         }
-    }   
 }
 
 
@@ -86,7 +81,8 @@ bool verificaExternos(char entrada){
 }
 
 bool erro(bool flag1, bool flag2, bool flag3, bool flag4){
-
+    /* Função que verifica se a primeira flag é verdadeira e todas as outras são falsas. Dessa forma, caso alguma flag de <token> esteja como true
+    não pode haver outro <token> como true também. Ou seja, 12x não pode existir porque seria dois <tokens> jutos, <num><variavel>*/ 
     if(flag1 == true && flag2 == flag3 == flag4 == false){
         
         return false; //Não tem erro
@@ -104,6 +100,10 @@ int main(){
     string entrada;
     FILE *arq;
     bool variavelFlag = false, numeroFlag = false, externosFlag = false, operacaoFlag = false, paradaFlag = false;
+    /*Caso a flag seja true, significa que a iteração está em um <token> e só posso ter um <token> por vez*/
+    bool paradaExternoFlag = false;  
+    /*flags para o externos*/
+
     
     arq = fopen("arquivoTeste.txt", "r"); //Faço abertura do documento para análise
     if(arq == NULL){
@@ -128,10 +128,11 @@ int main(){
                 numeroFlag = true;
                 paradaFlag = erro(numeroFlag, variavelFlag, externosFlag, operacaoFlag);
                 if(paradaFlag == false){
+
                     cout << "<NUM>\n";
                     continue;//Pulo para o próximo laço
                 }else{
-                    cout << "Erro!, era esperado 1234567890 \n";
+                    cout << "Erro!, era esperado ' ' (espaço!) \n";
                     break;
                 }
             }else if((int(entrada[i]) >= 65 && int(entrada[i]) <= 90) || (int(entrada[i]) >= 97 && int(entrada[i]) <= 122)){//Intervalo em ASCII das letras minúsculas e maiúsculas
@@ -144,7 +145,7 @@ int main(){
                     cout << "<VARIÁVEL>\n";
                     continue; 
                 }else{
-                    cout << "Erro! Era esperado abcdefghijklmnopqrstuvwxyz1234567890\n";
+                    cout << "Erro! Era esperado ' ' (espaço!)\n";
                     break;
                 }
                 
@@ -155,19 +156,28 @@ int main(){
                     ehOp(entrada[i]);
                     continue; 
                 }else{
-                    cout << "Erro! Era esperado *-/+\n";
+                    cout << "Erro! Era esperado ' ' (espaço!)\n";
                     break;
                 }
 
             }else if(verificaExternos(entrada[i])){
+                paradaExternoFlag = erro(true, externosFlag, false, false); //verificando a flag entre os próprios externos.
+                /* A lógica disso está em que o  <token> desses símbolos externos são únicos, não posso ter mais de um, 
+                então basta comparar externos com externos para ver se há erro. Dessa forma algo como () não é válido sem espaço*/
+
+                if(paradaExternoFlag == true){
+                    cout << "Erro! Esse <token> não existe!\n";
+                    break;
+                }
                 externosFlag = true;
 
                 paradaFlag = erro(externosFlag, numeroFlag, operacaoFlag, variavelFlag);
+
                 if(paradaFlag == false){
                     externos(entrada[i]);
                     continue; 
                 }else{
-                    cout << "Erro! Era esperado (){}[]\n";
+                    cout << "Erro! Era esperado ' ' (espaço!)\n";
                     break;
                 }
 
@@ -175,7 +185,7 @@ int main(){
                 if(entrada[i] == '\n'){
                     break; //Significa o fim da verificação desse linha
                 }else if(entrada[i] == ' '){
-                    //Significa o fim de um símbolo.
+                    //Significa o fim de um <token>.
                     numeroFlag = variavelFlag = operacaoFlag = externosFlag = false;
                     continue;
                 }
