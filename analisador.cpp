@@ -11,17 +11,14 @@ int ehNumero(string entrada, int i){
     while(int(entrada[i]) >= 48 && int(entrada[i]) <= 57){
         i++;
     }
-    
-
 
     return i;
 }
 
 int ehVariavel(string entrada, int i){
-    /* Função que verifica que a entrada é um token do tipo variavel. Para isso, é preciso verificar todo intervalo da entrada que faz parte da variavel,
+    /* Função que verifica que a entrada é um <token> do tipo variavel. Para isso, é preciso verificar todo intervalo da entrada que faz parte da variavel,
     ou seja, é preciso ver todas as letras e números depois das letras que são do tipo variavel.
-    
-     */
+    */
 
     
     while((int(entrada[i]) >= 48 && int(entrada[i]) <= 57) || (int(entrada[i]) >= 65 && int(entrada[i]) <= 90) || (int(entrada[i]) >= 97 && int(entrada[i]) <= 122)){
@@ -32,7 +29,7 @@ int ehVariavel(string entrada, int i){
 }
 
 void ehOp(char entrada){
-    // Função que verifica que a entrada é um token do tipo operação
+    // Função que verifica que a entrada é um <token> do tipo operação
 
     if(entrada == '+'){
         cout << "<MAIS>\n";
@@ -92,11 +89,27 @@ bool erro(bool flag1, bool flag2, bool flag3, bool flag4){
 
 }
 
+void mensagemDeErro(int ultimaFlag){
+    /*Através do número referido a cada flag de <token>, printa uma mensagem de erro.*/
+    if(ultimaFlag == 0){
+        cout << "Erro! Era esperado 1234567890 ou ' ' (espaço!)\n";
+    }else if(ultimaFlag == 1){
+        cout << "Erro! Era esperado abcdefghijklmnopqrstuvwxyz1234567890 ou ' ' (espaço!)\n";
+    }
+    else if(ultimaFlag == 2){
+        cout << "Erro! Era esperado ' ' (espaço!)\n";
+    }else{
+        cout << "Erro! Era esperado ' ' (espaço!)\n";
+    }
+}
+
+
 
 int main(){
   
     char var[100];
-    int saida, i = 0;
+    int saida, i = 0, ultimaFlag = -1;
+    // ultimaFlag: 0 numero, 1 variavel, 2 operação, 3 externos.
     string entrada;
     FILE *arq;
     bool variavelFlag = false, numeroFlag = false, externosFlag = false, operacaoFlag = false, paradaFlag = false;
@@ -113,8 +126,8 @@ int main(){
 
 
     do{
-        fgets(var, 100, arq); //Pego uma linha do arquivo
-        entrada = var; //coloco essa linha como string, pois algumas funções necessita de toda essa string, como a verificação de número e variavel.
+        fgets(var, 100, arq); //Pega uma linha do arquivo
+        entrada = var; //Coloca essa linha como string, pois algumas funções necessita de toda essa string, como a verificação de número e variável.
         cout << "Analisando: " << entrada << "\n";
         numeroFlag = variavelFlag = operacaoFlag = externosFlag = false;
 
@@ -122,18 +135,20 @@ int main(){
             
             if(int(entrada[i]) >= 48 && int(entrada[i]) <= 57){//Intervalo em ASCII dos números
                 saida = ehNumero(entrada, i);
-                i = saida - 1; //Como a função ehNumero percorre a string, é preciso atualizar o valor de i. O -1 se deve pelo fato de ele parar quando o caracter
-                // não é mais um número, então preciso 'retornar' uma casa para verificar a proxima. Exemplo: 123+x, nesse caso a função pararia em + e pularia para x
-                // logo em seguida, o que é um erro. 
+                i = saida - 1; 
+                /*Como a função ehNumero percorre a string, é preciso atualizar o valor de i. O -1 se deve pelo fato de ele parar quando o caracter
+                não é mais um número, então preciso 'retornar' uma casa para verificar a proxima. Exemplo: 123 + x, nesse caso a função pararia em + e pularia para x
+                logo em seguida, o que é um erro. */
                 numeroFlag = true;
                 paradaFlag = erro(numeroFlag, variavelFlag, externosFlag, operacaoFlag);
                 if(paradaFlag == false){
 
                     cout << "<NUM>\n";
-                    continue;//Pulo para o próximo laço
+                    ultimaFlag = 0; //Se torna o último <token> analisado, usado em caso de erro.
+                    continue;//Pula para o próximo laço
                 }else{
-                    cout << "Erro!, era esperado ' ' (espaço!) \n";
-                    break;
+                    mensagemDeErro(ultimaFlag);
+                    break; //Caso de erro, para o looping de verificação da linha atual
                 }
             }else if((int(entrada[i]) >= 65 && int(entrada[i]) <= 90) || (int(entrada[i]) >= 97 && int(entrada[i]) <= 122)){//Intervalo em ASCII das letras minúsculas e maiúsculas
                 saida = ehVariavel(entrada, i);
@@ -143,9 +158,10 @@ int main(){
                 paradaFlag = erro(variavelFlag, numeroFlag, externosFlag, operacaoFlag);
                 if(paradaFlag == false){
                     cout << "<VARIÁVEL>\n";
+                    ultimaFlag = 1;
                     continue; 
                 }else{
-                    cout << "Erro! Era esperado ' ' (espaço!)\n";
+                    mensagemDeErro(ultimaFlag);
                     break;
                 }
                 
@@ -154,19 +170,21 @@ int main(){
                 paradaFlag = erro(operacaoFlag, numeroFlag, externosFlag, variavelFlag);
                 if(paradaFlag == false){
                     ehOp(entrada[i]);
+                    ultimaFlag = 2;
                     continue; 
                 }else{
-                    cout << "Erro! Era esperado ' ' (espaço!)\n";
+                    mensagemDeErro(ultimaFlag);
                     break;
                 }
 
             }else if(verificaExternos(entrada[i])){
                 paradaExternoFlag = erro(true, externosFlag, false, false); //verificando a flag entre os próprios externos.
+
                 /* A lógica disso está em que o  <token> desses símbolos externos são únicos, não posso ter mais de um, 
                 então basta comparar externos com externos para ver se há erro. Dessa forma algo como () não é válido sem espaço*/
 
                 if(paradaExternoFlag == true){
-                    cout << "Erro! Esse <token> não existe!\n";
+                    mensagemDeErro(ultimaFlag);
                     break;
                 }
                 externosFlag = true;
@@ -175,9 +193,10 @@ int main(){
 
                 if(paradaFlag == false){
                     externos(entrada[i]);
+                    ultimaFlag = 3;
                     continue; 
                 }else{
-                    cout << "Erro! Era esperado ' ' (espaço!)\n";
+                    mensagemDeErro(ultimaFlag);
                     break;
                 }
 
@@ -190,13 +209,13 @@ int main(){
                     continue;
                 }
 
-                cout << "Entrada inválida!\n";
-                cout << "Carcteres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: " << entrada[i] << "\n";
+                cout << "Caractere inválido!\n";
+                cout << "Caracteres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caractere recebido: " << entrada[i] << "\n";
                 break; //A verificação da linha termina caso haja erro
             }
             
         }
-    }while(!feof(arq));
+    }while(!feof(arq)); //Looping só para no fim de arquivo.
 
 
     fclose(arq); //fechamento de arquivo

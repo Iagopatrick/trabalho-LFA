@@ -55,12 +55,12 @@ Analisando: 2 - 2
 Analisando: 12x - 12
 
 <NUM>
-Erro! Era esperado abcdefghijklmnopqrstuvwxyz1234567890
+Erro! Era esperado 1234567890 ou ' ' (espaço!)
 Analisando: 12 ()
 
 <NUM>
 <ABRE-PARÊNTESES>
-Erro! Esse <token> não existe!
+Erro! Era esperado ' ' (espaço!)
 Analisando: 12 ( ) - 12()
 
 <NUM>
@@ -68,20 +68,20 @@ Analisando: 12 ( ) - 12()
 <FECHA-PARÊNTESES>
 <MENOS>
 <NUM>
-Erro! Era esperado '(', ')', '{', '}', '[', ']'
+Erro! Era esperado 1234567890 ou ' ' (espaço!)
 Analisando: 12 + ´~
 
 <NUM>
 <MAIS>
-Entrada inválida!
+Caracter inválido!
 Carcteres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: �
 Analisando: ^ + 12
 
-Entrada inválida!
+Caracter inválido!
 Carcteres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: ^
 Analisando: asd - {:;}
 <VARIÁVEL>
 <MENOS>
 <ABRE-CHAVES>
-Entrada inválida!
+Caracter inválido!
 Carcteres esperados: 1234567890abcdefghijklmnopqrstuvwxyz+-*/(){}[] caracter recebido: :
