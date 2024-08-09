@@ -1,1 +1,1 @@
-Este trabalho teve por objetivo realizar uma simulação do que seria um autômato que consumiria um determinado alfabeto
+Este trabalho teve o objetivo de realizar uma simulação do que seria um autômato que consumiria um determinado alfabeto e retornaria uma resposta verdadeira ou falso, caso a entrada faça parte do alfabeto do autômato ou não.
